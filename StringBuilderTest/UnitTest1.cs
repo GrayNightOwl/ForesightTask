@@ -347,5 +347,21 @@ namespace StringBuilderTest
             Assert.AreEqual(result, sb.ToString());
             
         }
+
+
+
+        /// <summary>
+        /// Начинаем тестирование методов Append
+        /// </summary>
+        [TestMethod]
+        public void TestAppend()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat()
+            //act
+            //assert
+
+        }
     }
 }
