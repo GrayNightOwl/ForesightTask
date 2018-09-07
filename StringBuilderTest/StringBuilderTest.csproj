@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskForForsait\TaskForForsait.csproj">
+    <ProjectReference Include="..\TaskForForsait\TaskForForsight.csproj">
       <Project>{81e8b1bf-ed96-450b-9084-c0a58ce1eb76}</Project>
-      <Name>TaskForForsait</Name>
+      <Name>TaskForForsight</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

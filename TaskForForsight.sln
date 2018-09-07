@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskForForsait", "TaskForForsait\TaskForForsait.csproj", "{81E8B1BF-ED96-450B-9084-C0A58CE1EB76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskForForsight", "TaskForForsait\TaskForForsight.csproj", "{81E8B1BF-ED96-450B-9084-C0A58CE1EB76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringBuilderTest", "StringBuilderTest\StringBuilderTest.csproj", "{18106150-4F15-4AAC-9D5F-89550903FFE0}"
 EndProject

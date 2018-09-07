@@ -10,8 +10,6 @@ namespace TaskForForsait
     {
         static void Main(string[] args)
         {
-
-            //StringBuilder sb = new StringBuilder("Привет, мир");
             //Console.WriteLine("Длина " + sb.Length);
             //Console.WriteLine("Объём " + sb.Capacity);
             //sb.Append(", счастья тебе");
