@@ -5,7 +5,6 @@ using System.Text;
 namespace StringBuilderTest
 {
 
-
     //нужно протестировать stringbuilder на любые входные данные, из любых символов
 
 
@@ -281,13 +280,15 @@ namespace StringBuilderTest
         /// Начинаем тестирование методов Append
         /// </summary>
         [TestMethod]
-        public void TestMethod14()
+        public void TestAppend()
         {
+
+
             //arrange
             string s_hello = "Привет,";
             byte b = 255;
             string s_world = "мир";
-            char C = '\n'; 
+            char C = '\n';
             char[] c_mas = "BC".ToCharArray();
             decimal dec_number = 1;
             double doub_number = 2.2;
@@ -295,15 +296,18 @@ namespace StringBuilderTest
             int i_number = 1;
             long l_number = 2;
             object obj = ">Object<";
-            sbyte sb_number= -128;
+
+            sbyte sb_number = -128;
             short sh_number = 1;
             uint ui_number = 2;
             ulong ul_number = 3;
             ushort uh_number = 4;
+            
+            UnicodeEncoding encoder = new UnicodeEncoding();
             StringBuilder sb = new StringBuilder(s_hello);
 
             //act
-                      //в sb:  Привет,
+            //в sb:  Привет,
             sb.Append(true); //Привет,True
             sb.Append(b); //Привет,True255
             sb.Append(C); //Привет,True255\n
@@ -334,12 +338,14 @@ namespace StringBuilderTest
             }
             sb.Append(c_mas, 0, 1); //Привет,True255\nBC1\n2,2\n1,2\n12>Object<-128\n1мир234\n\nCB
             sb.Append(s_hello, 0, 2); //Привет,True255\nBC1\n2,2\n1,2\n12>Object<-128\n1мир234\n\nCBПр
+            sb.Append(encoder); //Убедимся, что метод способен принять объект любого класса, т.к. он наследуется от object
 
-            string result = "Привет,True255\nBC1\n2,2\n1,2\n12>Object<-128\n1мир234\n\nCBПр";
+
+            string result = "Привет,True255\nBC1\n2,2\n1,2\n12>Object<-128\n1мир234\n\nCBПрSystem.Text.UnicodeEncoding";
 
             //assert
             Assert.AreEqual(result, sb.ToString());
-
+            
         }
     }
 }
