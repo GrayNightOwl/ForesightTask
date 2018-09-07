@@ -5,16 +5,9 @@ using System.Text;
 namespace StringBuilderTest
 {
 
-    //StringBuilder sb1 = new StringBuilder("");
-    //for (int i = 0; i < Int32.MaxValue; i++) 
-    //{
-    //    sb1.Append(s);
-    //}
-
 
     //нужно протестировать stringbuilder на любые входные данные, из любых символов
 
-    // act
 
 
     [TestClass]
@@ -27,7 +20,7 @@ namespace StringBuilderTest
         /// </summary>
         /// 
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethod01()
         {
             try
             {
@@ -53,19 +46,13 @@ namespace StringBuilderTest
             }
         }
 
-        [TestMethod]
-        public void TestMethod2()
-        {
-            string s_hello = "Привет, мир";
-            StringBuilder sb = new StringBuilder(s);
-        }
 
         /// <summary>
         /// Данный метод тестирует конструкторы класса StringBuilder, метод преобразования к String, добавление к объекту string
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
-        public void TestMethod3()
+        public void TestMethod02()
         {
             // arrange
             string s0 = "";
@@ -116,5 +103,195 @@ namespace StringBuilderTest
         }
 
 
+        /// <summary>
+        /// Этот и следующие методы тестируют поведение класса на изменение длинны 
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod03()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+
+            //action
+            //Из проведённых тестов следует, что сейчас ёмкость объекта stringbuilder составляет 16. Попробуем урезать ёмкость и проверить поведение. Ожидаем исключение
+            sb.Capacity = 8;
+
+        }
+
+
+        /// <summary>
+        /// Попытка сделать ёмоксть отрицательной, ожидаем исключение
+        /// Попытка сделать то же самое через ссылки не увенчалась успехом
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod04()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder();
+
+            //action
+            //Из проведённых тестов следует, что сейчас ёмкость объекта stringbuilder составляет 16. Попробуем сделать ёмкость отрицательной и проверить поведение. Ожидаем исключение
+            //Получить ссылку на свойство невозможно, потому изменить значение по ссылке на отрицательное и посмотреть, что получится, также невозможно
+
+            sb.Capacity = -1;
+        }
+
+        /// <summary>
+        /// Попытка сделать ёмоксть отрицательной, ожидаем исключение
+        /// Попытка сделать то же самое через ссылки не увенчалась успехом
+        /// </summary>
+        [TestMethod]
+        public void TestMethod05()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder(16);
+
+            //action
+            sb.Capacity = 9;
+
+            //assert
+            Assert.AreEqual(9, sb.Capacity); //Проверим, изменилась ли ёмкость
+        }
+
+
+        /// <summary>
+        /// Попытка записать символ в несуществующую позицию (-1)
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod06()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder();
+            sb[-1] = 'a';
+        }
+
+
+        /// <summary>
+        /// Попытка записать символ в несуществующую позицию (0)
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod07()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder();
+            sb[0] = 'a';
+        }
+
+
+
+        /// <summary>
+        /// Проверка свойства Length
+        /// </summary>
+        [TestMethod]
+        public void TestMethod08()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+            sb.Length = 2;
+            Assert.AreEqual(s_hello.Substring(0,sb.Length), sb.ToString()); //Проверим, изменилась ли длина строки, исчезло ли "лишнее" содержимое.
+        }
+
+
+        /// <summary>
+        /// Проверка свойства Length на отрицательное значение, ожидаем исключение
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod09()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+            sb.Length = -1;
+        }
+
+
+        /// <summary>
+        /// Проверка свойства Length на отрицательное значение, ожидаем исключение
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+        public void TestMethod10()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+            sb.Length = -1;
+        }
+
+
+        ///// <summary>
+        ///// Проверка свойства Length и длины строки на максимальное значение, проверить не представляется возможным, т.к. не хватает памяти на рабочей машине
+        ///// </summary>
+        //[TestMethod]
+        //[ExpectedException(typeof(System.OutOfMemoryException))]
+        //public void TestMethod11()
+        //{
+        //    //arrange
+        //    string s_hello = "Привет, мир";
+        //    StringBuilder sb = new StringBuilder(s_hello);
+        //    for (long i = 0; i < 9147483647; i++)
+        //    {
+        //        sb.Append("0"); //добавляем к StringBuilder'y символ "0" больше раз, чем максимальное значение int
+        //    }
+        //}
+
+
+
+        /// <summary>
+        /// Проверка свойства Length на получение значения
+        /// </summary>
+        [TestMethod]
+        public void TestMethod12()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+
+            //assert
+
+            Assert.AreEqual(11, sb.Length);
+        }
+
+
+
+        /// <summary>
+        /// Проверяет максимальное значение объёма в StringBuilder
+        /// </summary>
+        [TestMethod]
+        public void TestMethod13()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+
+            //assert
+            Assert.AreEqual(Int32.MaxValue, sb.MaxCapacity);
+        }
+
+
+
+        /// <summary>
+        /// </summary>
+        [TestMethod]
+        public void TestMethod14()
+        {
+            //arrange
+            string s_hello = "Привет, мир";
+            StringBuilder sb = new StringBuilder(s_hello);
+
+            //act
+
+
+            //assert
+
+
+        }
     }
 }
