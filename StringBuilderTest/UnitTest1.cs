@@ -278,19 +278,67 @@ namespace StringBuilderTest
 
 
         /// <summary>
+        /// Начинаем тестирование методов Append
         /// </summary>
         [TestMethod]
         public void TestMethod14()
         {
             //arrange
-            string s_hello = "Привет, мир";
+            string s_hello = "Привет,";
+            byte b = 255;
+            string s_world = "мир";
+            char C = '_'; 
+            char[] c_mas = "BC".ToCharArray();
+            decimal dec_number = 1;
+            double doub_number = 2.2;
+            float f_number = 1.2f;
+            int i_number = 1;
+            long l_number = 2;
+            object obj = ">Object<";
+            sbyte sb_number= -128;
+            short sh_number = 1;
+            uint ui_number = 2;
+            ulong ul_number = 3;
+            ushort uh_number = 4;
             StringBuilder sb = new StringBuilder(s_hello);
 
             //act
+            //в sb: "Привет,"
+            sb.Append(true); //Привет,True
+            sb.Append(b); //Привет,True255
+            sb.Append(C); //Привет,True255_
+            sb.Append(c_mas); //Привет,True255_BC
+            sb.Append(dec_number); //Привет,True255_BC1
+            sb.Append(C); //Привет,True255_BC1_
+            sb.Append(doub_number); //Привет,True255_BC1_2,2
+            sb.Append(C); //Привет,True255_BC1_2,2_
+            sb.Append(f_number); //Привет,True255_BC1_2,2_1,2
+            sb.Append(C);  //Привет,True255_BC1_2,2_1,2_
+            sb.Append(i_number); //Привет,True255_BC1_2,2_1,2_1
+            sb.Append(l_number); //Привет,True255_BC1_2,2_1,2_12
+            sb.Append(obj); //Привет,True255_BC1_2,2_1,2_12>Object<
+            sb.Append(sb_number); //Привет,True255_BC1_2,2_1,2_12>Object<-128
+            sb.Append(C); //Привет,True255_BC1_2,2_1,2_12>Object<-128_
+            sb.Append(sh_number); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1
+            sb.Append(s_world); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир
+            sb.Append(ui_number); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир2
+            sb.Append(ul_number); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир23
+            sb.Append(uh_number); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234
+            sb.Append(C, 2); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234__
+            unsafe
+            {
+                fixed (char* ref_C = &c_mas[1])
+                {
+                    sb.Append(ref_C, 1); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234__C
+                }
+            }
+            sb.Append(c_mas, 0, 1); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234__CB
+            sb.Append(s_hello, 0, 2); //Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234__CBПр
 
+            string result = "Привет,True255_BC1_2,2_1,2_12>Object<-128_1мир234__CBПр";
 
             //assert
-
+            Assert.AreEqual(result, sb.ToString());
 
         }
     }
