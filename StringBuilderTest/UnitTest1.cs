@@ -425,14 +425,13 @@ namespace StringBuilderTest
         public void TestCopy()
         {
             //assert
-            char[] c_mas = {'H','e','l','l'};
-            string o_world = "o World";
-            string hello_world = "Hello World";
-            StringBuilder sb = new StringBuilder(o_world);
+            char[] c_mas = "A ".ToCharArray();
+            string b = "B";
+            StringBuilder sb = new StringBuilder(b);
             //act
-            sb.CopyTo(0, c_mas, 4, 7);
+            sb.CopyTo(0, c_mas, 1, 1);
             //assert
-            Assert.AreEqual(hello_world, c_mas.ToString());
+            Assert.AreEqual(b, c_mas[1].ToString());
         }
 
         [TestMethod]
