@@ -352,7 +352,8 @@ namespace StringBuilderTest
 
 
         /// <summary>
-        /// Начинаем тестирование методов Append
+        /// Типы входных данных и методы ограничены в написанном классе, поэтому проверяем работоспособность.
+        /// Также нужно проверить корректность выбрасываемых исключений
         /// </summary>
         [TestMethod]
         public void TestAppendFormat()
@@ -388,6 +389,25 @@ namespace StringBuilderTest
             sb.AppendFormat(format_3date, dt1, dt2, dt3);
             sb.Append('\n');
             sb.AppendFormat(us, format_3date, dt1, dt2, dt3);
+
+            //assert
+            Assert.AreEqual(result, sb.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
+        public void TestAppendLine()
+        {
+            //arrange
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Hello");
+            string result = "Hello\r\n world\r\n"; //признак конца строки, признак перевода каретки
+
+            //act
+            sb.AppendLine();
+            sb.AppendLine(" world");
 
             //assert
             Assert.AreEqual(result, sb.ToString());
