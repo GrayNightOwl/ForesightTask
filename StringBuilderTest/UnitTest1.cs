@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
+using System.Globalization;
 
 namespace StringBuilderTest
 {
@@ -358,17 +359,35 @@ namespace StringBuilderTest
         {
             //arrange
             StringBuilder sb = new StringBuilder();
-            string format_1arg= "{0:dd MMM}, {0:ddd}";
-            string format_2arg = "   ; {0}; {1:dd MMM}, {1:ddd}";
-            object obj = new UnicodeEncoding();
-            string result = "1. 3,50";
-            DateTime dt = new DateTime(2018, 9, 9,12,00,00);
-            object[] obj_arr = { 3.3, dt };
+            string format_1arg= "{0:dd MMM}, {0:ddd};  ";
+            string format_2arg = "{0};  {1:dd MMM}, {1:ddd};  ";
+            string format_2date = "{0:dd MMM}, {0:ddd};  {1:dd MMM}, {1:ddd};  ";
+            string format_3date = "{0:dd MMM}, {0:ddd};  {1:dd MMM}, {1:ddd};  {2:dd MMM}, {2:ddd};  ";
+            string result = "01 янв, Сб;  \n1;  01 янв, Сб;  \n01 janv., sam.;  \n1;  01 gen, sab;  \n01 янв, Сб;  02 янв, Вс;  \n01 janv., sam.;  02 janv., dim.;  \n01 янв, Сб;  02 янв, Вс;  03 янв, Пн;  \n01 Jan, Sat;  02 Jan, Sun;  03 Jan, Mon;  ";
+            DateTime dt1 = new DateTime(2000, 1, 1,12,00,00);
+            DateTime dt2 = new DateTime(2000, 1, 2, 12, 00, 00);
+            DateTime dt3 = new DateTime(2000, 1, 3, 12, 00, 00);
+            object[] obj_arr = { 1.0, dt1 };
+            CultureInfo fr = new CultureInfo("fr-FR", true);
+            CultureInfo it = new CultureInfo("it-IT", true);
+            CultureInfo us = new CultureInfo("us-US", true);
 
             //act
-            sb.AppendFormat(format_1arg, dt);
+            sb.AppendFormat(format_1arg, dt1);
+            sb.Append('\n');
             sb.AppendFormat(format_2arg, obj_arr);
-            sb.AppendFormat
+            sb.Append('\n');
+            sb.AppendFormat(fr, format_1arg, dt1);
+            sb.Append('\n');
+            sb.AppendFormat(it, format_2arg, obj_arr);
+            sb.Append('\n');
+            sb.AppendFormat(format_2date, dt1, dt2);
+            sb.Append('\n');
+            sb.AppendFormat(fr, format_2date, dt1, dt2);
+            sb.Append('\n');
+            sb.AppendFormat(format_3date, dt1, dt2, dt3);
+            sb.Append('\n');
+            sb.AppendFormat(us, format_3date, dt1, dt2, dt3);
 
             //assert
             Assert.AreEqual(result, sb.ToString());
