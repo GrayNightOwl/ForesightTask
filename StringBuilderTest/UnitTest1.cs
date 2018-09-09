@@ -421,6 +421,10 @@ namespace StringBuilderTest
             Assert.AreEqual(string.Empty, sb.ToString());
         }
 
+
+        /// <summary>
+        /// Необходимо проверить метод на возникающие исключения
+        /// </summary>
         [TestMethod]
         public void TestCopy()
         {
@@ -439,8 +443,34 @@ namespace StringBuilderTest
         {
             StringBuilder sb = new StringBuilder(8);
             int d_cap = 16;
+
             sb.EnsureCapacity(d_cap);
+
             Assert.AreEqual(d_cap, sb.Capacity);
+        }
+
+
+        [TestMethod]
+        public void TestEquals()
+        {
+            string hello = "Hello world";
+            StringBuilder sb1 = new StringBuilder(hello);
+            StringBuilder sb2 = new StringBuilder(hello);
+            object sbo2 = new StringBuilder(hello);
+
+
+            Assert.AreEqual(true, sb1.Equals(sb2));
+            sb1.Equals(sbo2);
+        }
+
+        [TestMethod]
+        public void TestGetType()
+        {
+            string hello = "Hello world";
+            StringBuilder sb1 = new StringBuilder(hello);
+            string result = "System.Text.StringBuilder";
+
+            Assert.AreEqual(result, sb1.GetType().ToString());
         }
     }
 }
