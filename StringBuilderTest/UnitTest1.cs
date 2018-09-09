@@ -394,9 +394,7 @@ namespace StringBuilderTest
             Assert.AreEqual(result, sb.ToString());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         [TestMethod]
         public void TestAppendLine()
         {
@@ -411,6 +409,39 @@ namespace StringBuilderTest
 
             //assert
             Assert.AreEqual(result, sb.ToString());
+        }
+
+        [TestMethod]
+        public void TestClear()
+        {
+            string hello_world = "Hello World";
+            StringBuilder sb = new StringBuilder(hello_world);
+            Assert.AreEqual(hello_world, sb.ToString());
+            sb.Clear();
+            Assert.AreEqual(string.Empty, sb.ToString());
+        }
+
+        [TestMethod]
+        public void TestCopy()
+        {
+            //assert
+            char[] c_mas = {'H','e','l','l'};
+            string o_world = "o World";
+            string hello_world = "Hello World";
+            StringBuilder sb = new StringBuilder(o_world);
+            //act
+            sb.CopyTo(0, c_mas, 4, 7);
+            //assert
+            Assert.AreEqual(hello_world, c_mas.ToString());
+        }
+
+        [TestMethod]
+        public void TestEnsureCapacity()
+        {
+            StringBuilder sb = new StringBuilder(8);
+            int d_cap = 16;
+            sb.EnsureCapacity(d_cap);
+            Assert.AreEqual(d_cap, sb.Capacity);
         }
     }
 }
