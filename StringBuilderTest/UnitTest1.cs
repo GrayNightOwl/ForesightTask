@@ -354,14 +354,24 @@ namespace StringBuilderTest
         /// Начинаем тестирование методов Append
         /// </summary>
         [TestMethod]
-        public void TestAppend()
+        public void TestAppendFormat()
         {
             //arrange
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat()
-            //act
-            //assert
+            string format_1arg= "{0:dd MMM}, {0:ddd}";
+            string format_2arg = "   ; {0}; {1:dd MMM}, {1:ddd}";
+            object obj = new UnicodeEncoding();
+            string result = "1. 3,50";
+            DateTime dt = new DateTime(2018, 9, 9,12,00,00);
+            object[] obj_arr = { 3.3, dt };
 
+            //act
+            sb.AppendFormat(format_1arg, dt);
+            sb.AppendFormat(format_2arg, obj_arr);
+            sb.AppendFormat
+
+            //assert
+            Assert.AreEqual(result, sb.ToString());
         }
     }
 }
