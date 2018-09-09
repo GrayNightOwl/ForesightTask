@@ -472,5 +472,11 @@ namespace StringBuilderTest
 
             Assert.AreEqual(result, sb1.GetType().ToString());
         }
+
+        [TestMethod]
+        public void Insert()
+        {
+
+        }
     }
 }
